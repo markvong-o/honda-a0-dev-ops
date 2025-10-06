@@ -1,0 +1,15 @@
+<!--Try adding some html here to update the form-content-end placeholder-->
+<div class="ulp-field" style="margin-top: 15px">
+  <input type="checkbox" name="ulp-terms-of-service" id="terms-of-service" />
+  <label for="terms-of-service">
+    {% if locale == "fr" %} Rester connecté {% else %} Keep me signed in {%
+    endif %}
+  </label>
+  <sup><button type="button" id="kmsi-info">&#9432;</button></sup>
+  <br /><br />
+  <span style="font-size: 12px">
+    {% if locale == "fr" %} Cochez cette case uniquement lorsque vous êtes sur
+    un appareil privé. {% else %} Check this box only when on a private device.
+    {% endif %}
+  </span>
+</div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<code>
+  <html>
+    <style>
+      :root {
+         --prompt-width: 600px !important;
+      }
+
+      .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+        height: 100%;
+      }
+
+      .custom-div {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .internal-div {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+
+    .custom-btn {
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+        color: #c00;
+        border-color: #c00;
+        background-color: white;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    .custom-h1 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    sup > button {
+        background: transparent;
+        border: none;
+        color: #005DAB !important;
+    }
+    button:hover {
+        cursor: pointer;
+    }
+    </style>
+    <head>
+        
+      {%- auth0:head -%}
+    </head>
+    <body>
+      <div class="main">
+        
+          {%- auth0:widget -%}
+          
+        
+      </div>
+
+      
+    </body>
+    <script>
+    const locale = "{{locale | string}}"
+    console.log(locale)
+    const navToCreateAccount = () => {
+        const domain = window.location.hostname
+        const app = {{application | json}}
+        window.open(`https://${domain}/authorize?client_id=${app.id}&screen_hint=signup&response_type=code`)
+    }
+
+    const navToJoinToday = () => {
+        window.open('https://login.honda.com/s/login1/SelfRegister?ec=302&startURL=%2Fs%2F');
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=> {
+        const createAccountBtn = document.getElementById('create-account-btn')
+        const joinTodayBtn = document.getElementById('join-today-btn');
+        const kmsiInfo = document.getElementById('kmsi-info');
+
+        if(createAccountBtn) {
+            createAccountBtn.addEventListener('click', navToCreateAccount)
+        }
+        if(joinTodayBtn) {
+            joinTodayBtn.addEventListener('click', navToJoinToday)
+        }
+        if(kmsiInfo) {
+            event.preventDefault();
+        }
+    })
+
+
+
+</script>
+  </html>
+</code>

@@ -1,0 +1,39 @@
+# .github/workflows/deploy-auth0-partials.yml
+name: Deploy Auth0 Prompt Partials
+# steps
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+    paths:
+      - "login/partials/**" # Run if login partials change
+      - ".github/workflows/deploy-auth0-partials.yml" # Run if YML file changes
+      - "scripts/deploy-partials-script.js" # Run if JS file changes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: demo-honda
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18" # Or your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm install node-fetch@2 html-minifier-terser
+
+      - name: Deploy Auth0 Prompt
+        run: node scripts/deploy-partials-script.js
+        env:
+          AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+          AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
+          # Define which prompt to update and its file path
+          PROMPT_TYPE: "login"
+          PROMPT_SECTION: "form-footer-start;form-footer-end;form-content-start;form-content-end" # This is the specific placeholder in Auth0
+          HTML_FILE_PATH: "login/partials/form-footer-start.html;login/partials/form-footer-end.html;login/partials/form-content-start.html;login/partials/form-content-end.html"

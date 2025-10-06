@@ -1,0 +1,16 @@
+<!--Try adding some html here to update the form-footer-start placeholder-->
+<hr />
+<style></style>
+<div class="custom-div">
+  <div class="internal-div">
+    <h1 class="custom-h1">
+      {% if locale == "fr" %} Besoin d'un compte? {% else %} Need an account? {%
+      endif %}
+    </h1>
+    <sup><button>&#9432;</button></sup>
+  </div>
+</div>
+
+<button type="" class="custom-btn" id="create-account-btn">
+  {% if locale == "fr" %} Créer un compte {% else %} Create Account {% endif %}
+</button>

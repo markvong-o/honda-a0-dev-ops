@@ -1,0 +1,4 @@
+export AUTH0_DOMAIN="demo-honda.cic-demo-platform.auth0app.com"
+export AUTH0_CLIENT_ID="f6KJODYwiJKT4IqvMufFin1VRm9NQxpQ"
+export AUTH0_CLIENT_SECRET="OOFn0cr3jvgBFh9lnpUudDBCG7Ic7tyOJyz52BPyTrTmYFYJbKp76rz9QWHMacn_"
+terraform plan

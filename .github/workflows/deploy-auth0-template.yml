@@ -1,0 +1,36 @@
+# .github/workflows/deploy-auth0-template.yml
+name: Deploy Auth0 Template
+# steps
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+    paths:
+      - "template.html" # Run if login partials change
+      - ".github/workflows/deploy-auth0-template.yml" # Run if YML file changes
+      - "scripts/deploy-template-script.js" # Run if JS file changes
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: demo-honda
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18" # Or your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm install node-fetch@2 html-minifier-terser
+
+      - name: Deploy Auth0 Prompt
+        run: node scripts/deploy-template-script.js
+        env:
+          AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+          AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+          AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
+          HTML_FILE_PATH: "template.html"
